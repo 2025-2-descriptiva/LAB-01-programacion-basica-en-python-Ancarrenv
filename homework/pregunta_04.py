@@ -29,23 +29,21 @@ def pregunta_04():
      ('12', 3)]
 
     """
-    with open('C:/Repositorios/LAB-01-programacion-basica-en-python-Ancarrenv-1/files/input/data.csv') as file :
-        for linea in file:
-            linea = linea.strip()
-            columna = linea.split('\t')
+    from collections import Counter
+    
+    fechas = []
+    with open(r"files/input/data.csv", "r", encoding="utf-8") as data:
+        for linea in data:
+            lista = linea.strip().split("\t")
+            fechas.append(lista[2].split("-")[1])   
 
-            date_str = columna[2]
-            fecha_mes = (date_str.split('-')[1]).zfill(2)
-        
+    resultado = sorted(Counter(fechas).items())
 
-            if  fecha_mes  in conteo:
-                conteo[fecha_mes] += 1
-            else:
-                conteo[fecha_mes] = 1
 
-    list_tuplas =  list(conteo.items()) ## convierte el dic en una lista de tuplas
-    list_tuplas.sort(key=lambda x: x[0]) # ordena
-    return list_tuplas   
+    return resultado
 
-resultado = pregunta_04()
-print(resultado)
+# resultado = pregunta_04()
+# print(resultado)
+
+if __name__ == "__main__":
+    print(pregunta_04())
