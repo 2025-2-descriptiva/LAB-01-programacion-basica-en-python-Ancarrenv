@@ -13,5 +13,28 @@ def pregunta_12():
 
     Rta/
     {'A': 177, 'B': 187, 'C': 114, 'D': 136, 'E': 324}
-
     """
+    resultado = {}
+
+    with open('C:/Repositorios/LAB-01-programacion-basica-en-python-Ancarrenv-1/files/input/data.csv') as file:
+        for linea in file:
+            linea = linea.strip()
+            columnas = linea.split('\t')
+
+            clave = columnas[0]            # Columna 1
+            column_spli = columnas[4].split(',')       # Columna 5 
+
+            suma = 0
+            for par in column_spli:
+                _, valor = par.split(':')   # separa la clave y el número
+                suma += int(valor)
+
+            if clave in resultado:
+                resultado[clave] += suma
+            else:
+                resultado[clave] = suma
+            
+            
+    return dict(sorted(resultado.items()))
+
+print(pregunta_12())

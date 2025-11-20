@@ -7,7 +7,10 @@ utilizar pandas, numpy o scipy.
 
 
 def pregunta_04():
+    conteo = {}
+
     """
+    
     La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la
     cantidad de registros por cada mes, tal como se muestra a continuación.
 
@@ -26,3 +29,23 @@ def pregunta_04():
      ('12', 3)]
 
     """
+    with open('C:/Repositorios/LAB-01-programacion-basica-en-python-Ancarrenv-1/files/input/data.csv') as file :
+        for linea in file:
+            linea = linea.strip()
+            columna = linea.split('\t')
+
+            date_str = columna[2]
+            fecha_mes = (date_str.split('-')[1]).zfill(2)
+        
+
+            if  fecha_mes  in conteo:
+                conteo[fecha_mes] += 1
+            else:
+                conteo[fecha_mes] = 1
+
+    list_tuplas =  list(conteo.items()) ## convierte el dic en una lista de tuplas
+    list_tuplas.sort(key=lambda x: x[0]) # ordena
+    return list_tuplas   
+
+resultado = pregunta_04()
+print(resultado)
